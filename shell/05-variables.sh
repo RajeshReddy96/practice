@@ -12,6 +12,8 @@ read -s PASSWD
 
 echo "your password is $PASSWD"
 
+echo "enter your otp"
+
 read -s otp
 
 echo "your otp is ::  $otp"
