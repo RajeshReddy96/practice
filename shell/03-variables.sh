@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# We can store variables with $ or ${}
 PERSON1=Rajesh
 PERSON2=Suresh
 
