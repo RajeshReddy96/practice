@@ -10,9 +10,8 @@ echo "please enter your password::"
 
 read -s PASSWD
 
-echo "your password is PASSWD"
-ECHO "GOOGLE"
+echo "your password is $PASSWD"
 
 read -s otp
 
-echo "your otp is $otp"
+echo "your otp is ::  $otp"
