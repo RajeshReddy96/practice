@@ -8,7 +8,7 @@ mkdir -p $LOGS_FOLDER
 
 USERID=$(id -u)
 R="\e[31m"
-G="\e[32m"
+G="\e[32m
 N="\e[0m"
 Y="\e[33m"
 
@@ -37,3 +37,12 @@ CHECK_ROOT
 dnf install mysql-server -y
 
 VALIDATE $? " Installing MYSQL Server"
+
+systemctl enable mysqld
+VALIDATE $? "Enabling mysql"
+
+systemctl start mysqld
+VALIDATE $? "started mysql"
+
+mysql_secure_installation --set-root-pass ExpenseApp@1
+VALIDATE $? "Setting up the roor password"
