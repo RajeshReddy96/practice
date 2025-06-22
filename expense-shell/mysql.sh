@@ -39,12 +39,12 @@ dnf install mysql-server -y &>>$LOG_FILE
 VALIDATE $? " Installing MYSQL Server"
 
 systemctl enable mysqld &>>$LOG_FILE
-VALIDATE $? "Enabling mysql"
+VALIDATE $? "Enabled MYSQL Server"
 
 systemctl start mysqld &>>$LOG_FILE
-VALIDATE $? "started mysql"
+VALIDATE $? "started mysql server"
 
-mysql -h mysql.rrajesh.online -u root -p ExpenseApp@1 -e 'show databases;' &>>$LOG_FILE
+mysql -h mysql.rrajesh.online -u root -pExpenseApp@1 -e 'show databases;' &>>$LOG_FILE
 if [ $?-ne 0 ]
 then 
     echo "MYSQL root password is not setup, settting now" &>>$LOG_FILE
@@ -53,4 +53,3 @@ then
 else
     echo -e "MYSQL root pasword is already setup..$Y SKIPPING $N" | tee -a $LOG_FILE
 fi
-VALIDATE $? "Setting up the roor password"
