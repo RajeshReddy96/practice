@@ -15,7 +15,7 @@ Y="\e[33m"
 CHECK_ROOT(){
     if [ $USERID -ne 0 ]
     then 
-        echo -e "$R Please run this script with root priviliges $N" | tee -a $LOG_FILE
+        echo -e "$R Please run this script with root priviliges $N" | tee -a $LOG_FILE 
         exit 1
     fi
 }
@@ -26,7 +26,7 @@ VALIDATE(){
         echo -e "$2 is ...$R FAILED $N" | tee -a $LOG_FILE 
         exit 1
     else
-        echo -e "$2 is... $G SUCCESS $N" | tee -a $LOG_FILE #$2 is displayed in the message to show which step was SUCCESS or FAILED.
+        echo -e "$2 is...$G SUCCESS $N" | tee -a $LOG_FILE #2 is displayed in the message to show which step was SUCCESS or FAILED.
     fi
 }
 
@@ -34,15 +34,15 @@ echo "Script started at: $(date)" | tee -a $LOG_FILE
 
 CHECK_ROOT
 
-dnf install mysql-server -y
+dnf install mysql-server -y &>>$LOG_FILE
 
 VALIDATE $? " Installing MYSQL Server"
 
-systemctl enable mysqld
+systemctl enable mysqld &>>$LOG_FILE
 VALIDATE $? "Enabling mysql"
 
-systemctl start mysqld
+systemctl start mysqld &>>$LOG_FILE
 VALIDATE $? "started mysql"
 
-mysql_secure_installation --set-root-pass ExpenseApp@1
+mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOG_FILE
 VALIDATE $? "Setting up the roor password"
